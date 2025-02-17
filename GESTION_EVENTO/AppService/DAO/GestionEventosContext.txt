@@ -1,0 +1,301 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+
+namespace GESTION_EVENTO.AppService.Models;
+
+public partial class GestionEventosContext : DbContext
+{
+    public GestionEventosContext()
+    {
+    }
+
+    public GestionEventosContext(DbContextOptions<GestionEventosContext> options)
+        : base(options)
+    {
+    }
+
+    public virtual DbSet<Equipo> Equipos { get; set; }
+
+    public virtual DbSet<Evento> Eventos { get; set; }
+
+    public virtual DbSet<InscripcionesEquipo> InscripcionesEquipos { get; set; }
+
+    public virtual DbSet<InscripcionesIndividual> InscripcionesIndividuals { get; set; }
+
+    public virtual DbSet<Participante> Participantes { get; set; }
+
+    public virtual DbSet<Usuario> Usuarios { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=LAPTOP-LFL8FKOC\\SQLEXPRESS01; DataBase=GESTION_EVENTOS; Trusted_Connection=True; TrustServerCertificate=True");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Equipo>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__equipos__3213E83F1924756D");
+
+            entity.ToTable("equipos", "persona");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Estado)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("estado");
+            entity.Property(e => e.FechaCreacion)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_creacion");
+            entity.Property(e => e.Institucion)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("institucion");
+            entity.Property(e => e.MiembrosMax).HasColumnName("miembros_max");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("nombre");
+            entity.Property(e => e.RepresentanteId).HasColumnName("representante_id");
+            entity.Property(e => e.Tipo)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("tipo");
+
+            entity.HasOne(d => d.Representante).WithMany(p => p.Equipos)
+                .HasForeignKey(d => d.RepresentanteId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__equipos__represe__2A4B4B5E");
+        });
+
+        modelBuilder.Entity<Evento>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__eventos__3213E83F0FCC90C7");
+
+            entity.ToTable("eventos", "evento");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Certificados)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("certificados");
+            entity.Property(e => e.Descripcion)
+                .HasColumnType("text")
+                .HasColumnName("descripcion");
+            entity.Property(e => e.Estado)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("estado");
+            entity.Property(e => e.FechaCreacion)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_creacion");
+            entity.Property(e => e.FechaFin)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_fin");
+            entity.Property(e => e.FechaInicio)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_inicio");
+            entity.Property(e => e.IdAdministrador).HasColumnName("id_administrador");
+            entity.Property(e => e.InformacionContacto)
+                .HasMaxLength(250)
+                .IsUnicode(false)
+                .HasColumnName("informacion_contacto");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("nombre");
+            entity.Property(e => e.Tipo)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("tipo");
+            entity.Property(e => e.Ubicacion)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("ubicacion");
+
+            entity.HasOne(d => d.IdAdministradorNavigation).WithMany(p => p.Eventos)
+                .HasForeignKey(d => d.IdAdministrador)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__eventos__id_admi__276EDEB3");
+        });
+
+        modelBuilder.Entity<InscripcionesEquipo>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__inscripc__3213E83FBC123536");
+
+            entity.ToTable("inscripciones_equipo", "registro");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Certificado)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("certificado");
+            entity.Property(e => e.Estado)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("estado");
+            entity.Property(e => e.FechaEntrega)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_entrega");
+            entity.Property(e => e.FechaInscripcion)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_inscripcion");
+            entity.Property(e => e.IdEquipo).HasColumnName("id_equipo");
+            entity.Property(e => e.IdEvento).HasColumnName("id_evento");
+
+            entity.HasOne(d => d.IdEquipoNavigation).WithMany(p => p.InscripcionesEquipos)
+                .HasForeignKey(d => d.IdEquipo)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__inscripci__id_eq__35BCFE0A");
+
+            entity.HasOne(d => d.IdEventoNavigation).WithMany(p => p.InscripcionesEquipos)
+                .HasForeignKey(d => d.IdEvento)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__inscripci__id_ev__34C8D9D1");
+        });
+
+        modelBuilder.Entity<InscripcionesIndividual>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__inscripc__3213E83F55301B6B");
+
+            entity.ToTable("inscripciones_individual", "registro");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Certificado)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("certificado");
+            entity.Property(e => e.Estado)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("estado");
+            entity.Property(e => e.FechaEntrega)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_entrega");
+            entity.Property(e => e.FechaInscripcion)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_inscripcion");
+            entity.Property(e => e.IdEvento).HasColumnName("id_evento");
+            entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
+
+            entity.HasOne(d => d.IdEventoNavigation).WithMany(p => p.InscripcionesIndividuals)
+                .HasForeignKey(d => d.IdEvento)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__inscripci__id_ev__30F848ED");
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.InscripcionesIndividuals)
+                .HasForeignKey(d => d.IdUsuario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__inscripci__id_us__31EC6D26");
+        });
+
+        modelBuilder.Entity<Participante>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__particip__3213E83F50D38311");
+
+            entity.ToTable("participantes", "persona");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Estado)
+                .HasMaxLength(1)
+                .IsFixedLength()
+                .HasColumnName("estado");
+            entity.Property(e => e.IdEquipo).HasColumnName("id_equipo");
+            entity.Property(e => e.IdUsuario).HasColumnName("id_usuario");
+
+            entity.HasOne(d => d.IdEquipoNavigation).WithMany(p => p.Participantes)
+                .HasForeignKey(d => d.IdEquipo)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__participa__id_eq__2E1BDC42");
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Participantes)
+                .HasForeignKey(d => d.IdUsuario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__participa__id_us__2D27B809");
+        });
+
+        modelBuilder.Entity<Usuario>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__usuarios__3213E83F72FE8B13");
+
+            entity.ToTable("usuarios", "persona");
+
+            entity.HasIndex(e => e.Correo, "UQ__usuarios__2A586E0B1801A875").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Cargo)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("cargo");
+            entity.Property(e => e.Correo)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("correo");
+            entity.Property(e => e.Direccion)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("direccion");
+            entity.Property(e => e.FechaCreacion)
+                .HasColumnType("datetime")
+                .HasColumnName("fecha_creacion");
+            entity.Property(e => e.FechaNacimiento)
+                .HasColumnType("date")
+                .HasColumnName("fecha_nacimiento");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("nombre");
+            entity.Property(e => e.Organizacion)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("organizacion");
+            entity.Property(e => e.Profesion)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("profesion");
+            entity.Property(e => e.Telefono)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("telefono");
+            entity.Property(e => e.UserPassword)
+                .HasMaxLength(20)
+                .IsUnicode(false)
+                .HasColumnName("user_password");
+        });
+
+        OnModelCreatingPartial(modelBuilder);
+    }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+}
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------
+public class WeatherController : ControllerBase
+{
+    private readonly IWeatherService _weatherService;
+
+    public WeatherController(IWeatherService weatherService)
+    {
+        _weatherService = weatherService;
+    }
+
+    [HttpGet]
+    public ActionResult<WeatherForecast> GetCurrentWeather()
+    {
+        var forecast = _weatherService.GetCurrentForecast();
+        if (forecast == null)
+        {
+            return NotFound();
+        }
+        return Ok(forecast);
+    }
+}

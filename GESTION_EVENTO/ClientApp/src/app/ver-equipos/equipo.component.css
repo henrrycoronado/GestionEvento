@@ -1,0 +1,110 @@
+button{
+  background-color: lightblue;
+  color: white;
+  border: 0px;
+  border-radius: 20px;
+  box-shadow: 1px 2px 3px black;
+  cursor:pointer;
+  transition: all .1s ease;
+  border-right: 2px solid rgb(146, 181, 193);
+  border-bottom: 3px solid rgb(146, 181, 193);
+}
+
+button:active{
+  color: white;
+  border: 0px;
+  transform: translateY(2px);
+  box-shadow: 0 0 0 black;
+  border-radius: 20px;
+}
+
+.titles{
+  width: 410px;
+  background-color: rgb(57, 57, 57, 0.888);
+  color: #ffffff;
+  height: 50px;
+  padding-top: 0%px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 1%;
+  box-shadow: 1px 2px 3px black;
+  border-bottom: 3px solid rgb(41, 41, 41, 0.888);
+  border-right: 2px solid rgb(41, 41, 41, 0.888);
+}
+
+.list{
+  list-style: none;
+  overflow-y: auto;
+  height: 598px;
+}
+
+.list_main{
+  display: flex;
+  cursor: pointer;
+  width: 600px;
+  background-color: rgba(255, 255, 255, 0.888);
+  color: black;
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 1%;
+  box-shadow: 1px 2px 3px black;
+  border-bottom: 3px solid rgb(41, 41, 41, 0.888);
+  border-right: 2px solid rgb(41, 41, 41, 0.888);
+  margin-bottom: 10px;
+}
+
+.list_element{
+  height: 35px;
+  width: 100px;
+  background-color: lightblue;
+  color: white;
+  border-radius: 20px;
+  border-right: 2px solid rgb(146, 181, 193);
+  border-bottom: 3px solid rgb(146, 181, 193);
+  box-shadow: 1px 2px 3px black;
+  text-align: center;
+}
+
+
+.list_element2{
+  margin-top: .2%;
+  margin-left: .5%;
+  height: 35px;
+  width: auto;
+  padding: 5px;
+  color: white;
+  border-radius: 20px;
+  text-align: center;
+  background-color: rgb(136, 136, 136);
+}
+
+.main_images{
+  width: 350px;
+  height: 200px;
+  border-radius: 20px;
+  box-shadow: 1px 2px 3px black;
+}
+
+.data_list{
+  width: 210px;
+  background-color: rgb(255, 255, 255);
+  color: #1b0404;
+  height: 30px;
+  padding-top: 2px;
+  border-radius: 20px;
+  padding-left: 6%;
+  margin-bottom: 5px;
+  box-shadow: 1px 2px 3px black;
+  border-bottom: 2px solid rgb(95, 95, 95);
+  border-right: 2px solid rgb(95, 95, 95);
+}
+.message{
+  width: 500px;
+  height: 150px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 1px 2px 3px black;
+  color: #1b0404;
+  padding: 2%;
+}

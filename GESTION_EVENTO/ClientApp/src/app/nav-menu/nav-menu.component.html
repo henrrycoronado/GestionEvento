@@ -1,0 +1,54 @@
+<header>
+  <nav
+    class="sidebar"
+  >
+  <!--
+  "navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+-->
+    <div class="container">
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+        [ngClass]="{ show: isExpanded }"
+      >
+        <ul class="navbar-nav flex-grow">
+          <li
+            class="icon"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/']"
+            ><img class="icon" src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Free-Download.png" alt="profile"></a>
+          </li>
+          <li [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/evento']"
+              ><img class="icon2" src="https://static.vecteezy.com/system/resources/previews/016/314/814/non_2x/transparent-event-schedule-icon-free-png.png" alt="events"></a
+            >
+          </li>
+          <li class="icon" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/equipo']"
+              ><img class="icon" src="https://www.svgrepo.com/show/449088/group.svg" alt="team"></a
+            >
+          </li>
+          <li class="icon" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/gestion-evento']"
+              ><img class="icon" src="https://www.svgrepo.com/show/130193/calendar-tool.svg" alt="event_management"></a
+            >
+          </li>
+          <li class="icon" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/gestion-equipo']"
+            ><img class="icon" src="https://cdn-icons-png.flaticon.com/256/582/582679.png" alt="team_management"></a>
+          </li>
+          <li class="icon" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/crear']"
+              ><img class="icon" src="https://th.bing.com/th/id/R.98e3ecd4e4507c8e4c7e558e5ac5d352?rik=%2fhfWQ70W7ufsJw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_15833.png&ehk=0eHK3qiWDqe6us0v3zjuYMT4IP0GTNDMKn7JYOo2vOw%3d&risl=&pid=ImgRaw&r=0" alt="create"></a
+            >
+          </li>
+          <li class="icon" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/historial']"
+            ><img class="icon" src="https://icon-library.com/images/history-icon-png/history-icon-png-29.jpg" alt="historial"></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,6 @@
+"ConnectionStrings": {
+  "DefaultConnection": "Server=CHOMUSUKE\\SQLEXPRESS; DataBase=GESTION_EVENTO; Trusted_Connection=True; TrustServerCertificate=True"
+}
+
+
+// appsettings.json

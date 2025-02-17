@@ -1,0 +1,25 @@
+<div>
+  <h1>Eventos Disponibles</h1>
+  <ul>
+    <li *ngFor="let evento of eventos" (click)="selectEvento(evento)">
+      {{ evento.Nombre }}
+    </li>
+  </ul>
+</div>
+
+<div>
+  <h2>Buscar Evento</h2>
+  <div>
+    <label for="name">Nombre:</label>
+    <input id="name" [(ngModel)]="name" placeholder="Nombre del evento">
+    <button (click)="buscarPorNombre()">Buscar por Nombre</button>
+  </div>
+  
+</div>
+
+<div *ngIf="selectedEvento">
+  <h2>Detalle del Evento Seleccionado</h2>
+  <p>Nombre: {{ selectedEvento.Nombre }}</p>
+  <p>Descripción: {{ selectedEvento.Descripcion }}</p>
+  <!-- Agrega más campos según sea necesario -->
+</div>

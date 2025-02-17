@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="perfil.component.css">
+</head>
+<body>
+    <div class="user_data" style="width: 60%;">
+        <!-- perfil -->
+        <a class="user_icon">
+            <svg
+            width="104"
+            height="100"
+            viewBox="0 0 104 100"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            >
+            <rect
+                x="21.5"
+                y="3.5"
+                width="60"
+                height="60"
+                rx="30"
+                stroke="white"
+                stroke-width="7"
+            ></rect>
+            <g clip-path="url(#clip0_41_27)">
+                <mask
+                id="mask0_41_27"
+                style="mask-type:luminance"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="61"
+                width="104"
+                height="52"
+                >
+                <path
+                    d="M0 113C0 84.2812 23.4071 61 52.1259 61C80.706 61 104 84.4199 104 113H0Z"
+                    fill="white"
+                ></path>
+                </mask>
+                <g mask="url(#mask0_41_27)">
+                <path
+                    d="M-7 113C-7 80.4152 19.4152 54 52 54H52.2512C84.6973 54 111 80.3027 111 112.749H97C97 88.0347 76.9653 68 52.2512 68H52C27.1472 68 7 88.1472 7 113H-7ZM-7 113C-7 80.4152 19.4152 54 52 54V68C27.1472 68 7 88.1472 7 113H-7ZM52.2512 54C84.6973 54 111 80.3027 111 112.749V113H97V112.749C97 88.0347 76.9653 68 52.2512 68V54Z"
+                    fill="white"
+                ></path>
+                </g>
+            </g>
+            </svg>
+        </a>
+        <h1 class="user_title" style="list-style-type:none; height: 60px; margin-left: 2%;">
+            <b style="font-style:oblique;">Datos de Usuario</b>
+        </h1>
+        <div class="user_data" style="display: flex;">
+            <div style="margin-left: 6%;">
+                <ul style="list-style-type:none">
+                    <li class="data_list" style="color: white;">
+                        Nombre
+                    </li>
+                    <li class="data_list" style="color: white;">
+                        Direccion
+                    </li>
+                    <li class="data_list" style="color: white;">
+                        Fecha_nac
+                    </li>
+                    <li class="data_list" style="color: white;">
+                        Correo
+                    </li>
+                    <li class="data_list" style="color: white;">
+                        Telefono
+                    </li>
+                    <li class="data_list" style="color: white;">
+                        Organizacion
+                    </li>
+                    <li class="data_list" style="color: white;">
+                        Profesion
+                    </li>
+                    <li class="data_list" style="color: white;">
+                        Cargo
+                    </li>
+                </ul>    
+            </div>
+            <div>
+                <ul style="list-style-type:none">
+                    <li class="data_list" style="width: 120%; background-color: white; border-color: rgb(218, 218, 218);">
+                        Juan Pablo
+                    </li>
+                    <li class="data_list" style="width: 120%; background-color: white; border-color: rgb(218, 218, 218)">
+                        Av. San Pedro IV
+                    </li>
+                    <li class="data_list" style="width: 120%; background-color: white; border-color: rgb(218, 218, 218);">
+                        2000/03/20
+                    </li>
+                    <li class="data_list" style="width: 120%; background-color: white; border-color: rgb(218, 218, 218);">
+                        juan.medina.rAucb.edu.bo
+                    </li>
+                    <li class="data_list" style="width: 120%; background-color: white; border-color: rgb(218, 218, 218);">
+                        451658413
+                    </li>
+                    <li class="data_list" style="width: 120%; background-color: white; border-color: rgb(218, 218, 218);">
+                        UCB
+                    </li>
+                    <li class="data_list" style="width: 120%; background-color: white; border-color: rgb(218, 218, 218);">
+                        Estudiante
+                    </li>
+                    <li class="data_list" style="width: 120%; background-color: white; border-color: rgb(218, 218, 218);">
+                        <b style="color: rgb(172, 172, 172);">NULL</b>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button style="margin-left: 35%; width: 170px;"><b>Cerrar Sesión</b></button>
+    </div>
+    <div style="width: 10px; height: 100vh; margin-top: -3%; margin-left: 5%; border: 2px dashed rgb(137, 137, 137);"></div>
+    <div style="margin-left: 200px;">
+        <h2 class="user_title" style="height: auto;"> Eventos de: {{getMonthName()}}</h2>
+        <div class="calendar">
+            <div style="display: flex; grid-gap: 8px; margin-left: 2%;">
+                <div class="day header">Domingo</div>
+                <div class="day header">Lunes</div>
+                <div class="day header">Martes</div>
+                <div class="day header">Miércoles</div>
+                <div class="day header">Jueves</div>
+                <div class="day header">Viernes</div>
+                <div class="day header">Sábado</div>
+            </div>
+            <!-- Mostrar dias del mes -->
+            <div style="display: flex; flex-wrap: wrap; padding: 10px; grid-gap: 10px;">
+                <div *ngFor="let empty of [].constructor(getFirstDayOfMonth()); let i = index" class="day">/</div>
+                <div *ngFor="let day of [].constructor(getDaysInMonth()); let i = index" 
+                     [ngClass]="{'day': true, 'today': isToday(i+1)}">
+                    {{ i + 1 }}
+                </div>
+            </div>
+        </div>
+        <h2 class="user_title" style="height: auto; margin-top: 5px;"> Equipos </h2>
+        <div>
+            <ul class="horizontal_list">
+                <li class="groups">grupo1</li>
+                <li class="groups">grupo2</li>
+                <li class="groups">grupo3</li>
+                <li class="groups">grupo4</li>
+                <li class="groups">grupo5</li>
+                <li class="groups">grupo5</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
